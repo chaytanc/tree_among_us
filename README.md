@@ -5,7 +5,8 @@
 2) Plug in USB Bluetooth thingy
 3) Type   
 muselsl list -b bgapi  
-in the terminal to find your Muse's ip address (00:55:DA:B5:74:8A for today)  
+in the terminal to find your Muse's ip address (00:55:DA:B5:74:8A for today) 
+3.5) Put Muse in pairing mode by holding down power button until lights are blinking or something??
 4) Type  
 muselsl stream -b bgapi -a 00:55:DA:B5:74:8A 
 to connect (or replace w your specific ip address)  
