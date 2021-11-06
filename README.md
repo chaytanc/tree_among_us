@@ -14,3 +14,6 @@ to connect (or replace w your specific ip address)
 open LabRecorder  
 )
 7) Stream, capture to a xdf file and process  
+  
+Alternatively instead of using LabRecorder, use muselsl view -b Qt5Agg or muselsl view --version 2, whichever works for your OS  
+MuseLSL Documentation: https://github.com/alexandrebarachant/muse-lsl  
