@@ -1,0 +1,51 @@
+!bg dorm.jpg
+
+*Beep Beep* (Alarm sounding)
+
+“Ughh, is it 9 already? I sleep just a bit more.”
+
+(Sleep)
+
+*yawn* “Ok, let’s wake up for real this time.” I reach out for my phone and check the time.
+
+ “Shit... It’s 30 minutes already?! I’ll be late for the Hackjam.”
+
+I climb down the bed, put on my clothes, and brush my teeth. Good. This should do. Now, let’s go.
+
+A notification pops up on my phone saying, “... Hackjam starts at 11…”
+
+“Damn, I just woke up early for nothing then. Well, at least now I have more time for myself.”
+
+If it’s at 11, I should have at least an hour to myself then. By instinct, I turn the TV on and leave it on the background. I boil some water and pour it over the oatmeals. Perfect option for breakfast to start the day. Having Instagram open next to my Oatmeal, I try to complete my scrolling ritual.
+
+“Huh?” A piece of news caught my attention. It reads, “Man found dead impaled horrendously by tree’s branches.” Ok… weird.
+
+Without knowing, an hour has passed in no time. Oh right, I still have to water my plants.
+
+!choice plant
+
+!cond plant 1 After watering the plants, I put on my jacket and head out. I took a bus to the CSE2 building and is led into the building by a Hackjam’s officer.
+
+!cond plant 0 I ignore the plants and put on my jacket and head out. I took a bus to the CSE2 building and is led into the building by a Hackjam’s officer.
+
+I’m so excited. We don’t have that much time for the Hackjam, but we should still be able to create something properly. I arrive indicated room in the email for the competition. Haruto is manning the front desk and handing out the schedule for today’s activities. “Hey! Welcome to the Hackjam, here’re a couple of stickers and the schedule!”
+
+I receive the schedule with a terse nod. Then, I walk in and weave my way to the seat where I have always been in the previous meetings. It’s 11 now. People should be coming anytime soon.
+
+Oh, I see Richard among the crowd. His actual name is Richardson. He’s a very good friend of mine. He and I went to the same high school. Now, we study at UW together. I live in an apartment on West Campus, and I have invited him over several times, but I have never been to his place. I ask him sometime if I could check out his place at some point, but he keeps refusing me. Maybe, next time, I should insist on this.
+
+“Hey, Richard, what’s up!” I yell out to Richard.
+
+“Sup man. Ready?” He replies.
+
+“Yeah, can’t wait to start.” I reveal a devious grin.
+
+He takes a seat next to me, and soon, the opening ceremony begins. We listen attentively to the introduction and the workshops while having occasional side conversations. After the workshops, it’s time to group with others and come up with an idea and a name for the project.
+
+We form a group with three other people around us since we haven’t had a group yet. We decide to create a game incorporating brainwaves. Brainwaves are not my specialty, but I’m excited to pick up new skills.
+
+The rest of that day proceeds as it should. We come up with grandiose ideas and details, start the work, struggle because of too complicated details that can’t be incorporated, and oversimplify the project in the end.
+
+… Or this is how it’s supposed to have proceeded. I look down at my chest, or where it’s supposed to have been, at the scabrous pointy object that has sprouted out from my chest. The floor below my feet is painted with a thick warm red substance. Is it… my blood? Am I dying just like this?
+
+“Ugghhh…” I struggle to mutter a groan. My breath staggers. My knees collapse, and I fall flat onto the floor. My eyelids are feeling heavier and heavier. My vision is blurring. Richardson? Is that you? Help me…
