@@ -1,6 +1,22 @@
 import pygame
 import pygame.freetype  # Import the freetype module.
-from views import Background, ChoiceMenu, ConditionalView
+from views import Background, ChoiceMenu, ConditionalView, TextView
+
+# from pylsl import StreamInlet, resolve_stream
+
+# # first resolve an EEG stream on the lab network
+# def get_inlet():
+#     print("looking for an EEG stream...")
+#     streams = resolve_stream('type', 'EEG')
+#     print("Streams", streams)
+#     for stream in streams:
+#         print("id", str(stream.source_id()))
+#         if stream.source_id() == "stressdata":
+#             inlet = StreamInlet(stream)
+#     return inlet
+
+
+# inlet = get_inlet()
 
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
@@ -49,6 +65,7 @@ slides = read_script('script.txt')
 # !bg blah.jpg
 # !choice plant
 # anything else is text
+
 
 background = Background("black.jpg")
 
