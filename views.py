@@ -141,9 +141,30 @@ class BrainChoice():
         self.choice_id = choice_id
         self.state = {}
         self.selected = 0
+        self.done = False
 
     def update_state(self, state):
         self.state = state
+
+    def update_eeg_sample(self, sample):
+        self.sample = sample
+
+        stressed = self.sample[1] > 1.3 # stressed
+
+        if self.choice_id == "threat":
+            chose_stressed = self.state['stress'] == 1
+            self.selected = stressed * chose_stressed
+
+        elif self.choice_id == "building":
+            self.selected = 1 - stressed
+
+
+        print("brainchoice test selected: ", self.selected)
+
+        self.done = True
+
+    def process_event(self, event):
+        pass
 
     def render(self, screen, dt=1/60.0):
         pass
