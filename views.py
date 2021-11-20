@@ -135,3 +135,15 @@ class ConditionalView():
         else:
             self.view.render(screen, dt)
             self.done = self.view.done
+
+class BrainChoice():
+    def __init__(self, choice_id):
+        self.choice_id = choice_id
+        self.state = {}
+        self.selected = 0
+
+    def update_state(self, state):
+        self.state = state
+
+    def render(self, screen, dt=1/60.0):
+        pass

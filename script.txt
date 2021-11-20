@@ -22,6 +22,8 @@ If it’s at 11, I should have at least an hour to myself then. By instinct, I t
 
 Without knowing, an hour has passed in no time. Oh right, I still have to water my plants.
 
+!brain alpha
+
 !choice plant
 
 !cond plant 1 After watering the plants, I put on my jacket and head out. I took a bus to the CSE2 building and is led into the building by a Hackjam’s officer.
