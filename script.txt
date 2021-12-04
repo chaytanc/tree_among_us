@@ -1,42 +1,52 @@
 !bg dorm.jpg
 
+*sound alarm*
+
+*background music’s loop*
+
 *Beep Beep* (Alarm sounding)
 
-“Ughh, is it 9 already? I sleep just a bit more.”
+“Ughh, is it 9 already? I'll sleep just a bit more.”
 
 (Sleep)
 
 *yawn* “Ok, let’s wake up for real this time.” I reach out for my phone and check the time.
 
- “Shit... It’s 30 minutes already?! I’ll be late for the Hackjam.”
-
+“Shit... It’s 30 minutes already?! I’ll be late for the Hackjam.”
 I climb down the bed, put on my clothes, and brush my teeth. Good. This should do. Now, let’s go.
 
 A notification pops up on my phone saying, “... Hackjam starts at 11…”
-
 “Damn, I just woke up early for nothing then. Well, at least now I have more time for myself.”
 
-If it’s at 11, I should have at least an hour to myself then. By instinct, I turn the TV on and leave it on the background. I boil some water and pour it over the oatmeals. Perfect option for breakfast to start the day. Having Instagram open next to my Oatmeal, I try to complete my scrolling ritual.
+If it’s at 11, I should have at least an hour to myself then. By instinct, I turn the TV on and leave it on in the background. I boil some water and pour it over the oatmeal. Perfect option for breakfast to start the day. Having Instagram open next to my Oatmeal, I try to complete my scrolling ritual.
 
-“Huh?” A piece of news caught my attention. It reads, “Man found dead impaled horrendously by tree’s branches.” Ok… weird.
+“Huh?” A piece of news caught my attention. It reads, “Man found dead impaled horrendously by a tree’s branches.” That’s kinda weird, but okay.
 
 Without knowing, an hour has passed in no time. Oh right, I still have to water my plants.
 
+
 !choice plant
 
-!cond plant 1 After watering the plants, I put on my jacket and head out. I took a bus to the CSE2 building and is led into the building by a Hackjam’s officer.
+!cond plant 0 Should I though? I’m kinda late now. I will just return and water it later.
 
-!cond plant 0 I ignore the plants and put on my jacket and head out. I took a bus to the CSE2 building and is led into the building by a Hackjam’s officer.
+!cond plant 1 Ok. Time is short, but who cares if I’m a bit late.
 
-I’m so excited. We don’t have that much time for the Hackjam, but we should still be able to create something properly. I arrive indicated room in the email for the competition. Haruto is manning the front desk and handing out the schedule for today’s activities. “Hey! Welcome to the Hackjam, here’re a couple of stickers and the schedule!”
 
-I receive the schedule with a terse nod. Then, I walk in and weave my way to the seat where I have always been in the previous meetings. It’s 11 now. People should be coming anytime soon.
+!bg synaptech_room.jpg
 
-Oh, I see Richard among the crowd. His actual name is Richardson. He’s a very good friend of mine. He and I went to the same high school. Now, we study at UW together. I live in an apartment on West Campus, and I have invited him over several times, but I have never been to his place. I ask him sometime if I could check out his place at some point, but he keeps refusing me. Maybe, next time, I should insist on this.
+I put on my jacket and head out. I took a bus to the CSE2 building and was led into the building by a Hackjam officer.
+
+I’m so excited. We don’t have that much time for the Hackjam, but we should still be able to create something properly. I arrived at the indicated room in the email for the competition.
+
+Haruto is manning the front desk and handing out the schedule for today’s activities. “Hey! Welcome to the Hackjam! Here’re a couple of stickers and the schedule!”
+
+I receive the schedule with a terse nod. Then, I walk in and weave my way to the seat where I had always been in the previous meetings. It’s 11 now. People should be coming anytime soon.
+
+Oh, I see Richard among the crowd. His actual name is Richardson. He’s a very good friend of mine. He and I went to the same high school. Now, we study at UW together. I had invited him over to my dorm several times, but I have never been to his place. I asked him a couple of times if I could check out his place at some point, but he kept refusing me. Maybe, next time, I should insist on this.
 
 “Hey, Richard, what’s up!” I yell out to Richard.
 
-“Sup man. Ready?” He replies.
+“Good. Ready?” He replies.
 
 “Yeah, can’t wait to start.” I reveal a devious grin.
 
@@ -46,6 +56,215 @@ We form a group with three other people around us since we haven’t had a group
 
 The rest of that day proceeds as it should. We come up with grandiose ideas and details, start the work, struggle because of too complicated details that can’t be incorporated, and oversimplify the project in the end.
 
-… Or this is how it’s supposed to have proceeded. I look down at my chest, or where it’s supposed to have been, at the scabrous pointy object that has sprouted out from my chest. The floor below my feet is painted with a thick warm red substance. Is it… my blood? Am I dying just like this?
+!bg black_room.jpg
 
-“Ugghhh…” I struggle to mutter a groan. My breath staggers. My knees collapse, and I fall flat onto the floor. My eyelids are feeling heavier and heavier. My vision is blurring. Richardson? Is that you? Help me…
+… Or this is how it’s supposed to have proceeded. Towards the end of the Hackjam, the light flickers out. Blackness overtakes the entire CSE2 building. I can barely make out other people’s hues.
+
+I’m about to make some side jokes about how everyone will die after the light is on again when I hear someone’s grunt and a loud thud.
+
+*Grunting*
+1second gap
+*Body_thud sound*
+
+Immediately after, like a chain of reaction, one thud starts another thud.((*Grunting* + short delay (0.1s/0.2s?) *Body_thud sound*)x5) I only realize it’s the people in the room collapsing onto the ground when my groupmates fall down before me. Then, silence fills the room.
+
+“Richard? Where is Richard?” I frantically searched for him. It was me who pulled him here today. Damn it. Suddenly, the light returns to the room.
+
+!bg damaged_synaptech_room.jpg
+
+Everyone lies on the floor motionless. Red puddles form under them. Is that blood? I immediately feel the urge to puke at this ghastly scene, but something stops me.
+
+I look down at my chest, or where it’s supposed to have been, at the scabrous pointy object sprouting from my chest. The floor below my feet is painted with a thick warm red substance. Is it… my blood? Am I dying just like this?
+
+“Ugghhh…” I struggle to mutter a groan. My breath staggers. My knees collapse, and I fall flat onto the floor. My eyelids are feeling heavier and heavier. My vision is blurring. Richard? Is that you? Thank goodness, you’re fine…
+
+Day 2:
+!bg dorm.jpg
+
+I bolt awake and jump up. “AAAHHHH!” I yell, effectively waking my roommate. “Fucking sissy” I hear my roommate mutter before flipping the other way and going back to sleep. I rummage around my bed before realizing my phone had also dropped to the floor. Great, everything is going splendidly. I climb down and check my phone, but something feels off.
+
+Saturday, 11-6-21, 8:55am… Why did I wake up so early? I normally sleep in until 11 on weekends... I start climbing back up to my bed when my phone starts ringing. I almost jump and fall back down to the ground, but just save myself by grabbing back onto the ladder.
+
+“Hackjam” my phone screen sprawls, almost tauntingly, from the ground, and that’s when it all came back. I’d already lived this day before, we were about to finish making our game, we just needed to do one more test before… before what? What happened? I remember something… brown? Sticking out of my chest... Had I died? Why? From what?
+
+It was probably just a bizarre dream, I reason with myself. Some crazy detailed deja vu. That has to be it. Dying at the Hackjam? That’s impossible. And so I went on with my life. I feel weirdly on edge and my body’s screaming at me to stay away from the Hackjam, but I ignored these irrational feelings.
+
+!bg synaptech_room.jpg
+
+I leave the building at 10:40, and get to the Hackjam right on the dot. Haruto and some others are there, but none of the normal members are here yet. “Hey! Welcome to the Hackjam, here’re a couple of stickers and the schedule!”
+
+[Haruto asks, “Hey, are you doing ok?” if the reader is stressed, and then a “Yeah, I’m ok” I say absent-mindedly in response]
+
+I nod in appreciation, take the goodies, and make my way to my usual seat, just like yesterday. Wait, I mean just like in my dream. I feel out of it, but no one needs to know that. Everyone starts coming in, but I don’t see my best friend, Richard.
+
+Eventually he shows up, around 10 minutes into the opening ceremony. He similarly looks out of it, but I can’t tell why. He sits next to me without a word and we just listen to the opening ceremony together, until he asks me abruptly
+
+“Sup man. Ready?”
+
+“Huh?” I answer, caught off guard. “Uh, sure… Anyway, you ok? You don’t look so good”
+
+“I don’t?” He sounds extremely worried.
+
+“Don’t worry about the Hack-a-thon, we’ll destroy” I reassure him, which feels weird since he’s usually the calm one that reassures me.
+
+“Yeah, mhm, ofc we will” He answers, almost as if that wasn’t what he was worried about, he starts really worrying me now. He looks over and sees my worried face, but that only seems to make him feel worse, almost as if he were feeling guilty about something?
+
+Soon he seems to get a hold of himself, and the rest of the day goes pretty smoothly. Everything goes exactly as it had in my dream, except my interactions with Richard.
+
+I didn’t think much of this, I was probably paying more attention to Richard and that was probably why I’m noticing all this difference, I told myself. Around a quarter of the way through the working period,
+
+Richard calls out to me, asking to walk out for a second.
+“I need some air, wanna come with me?”
+
+“Sure” I answer, wondering if he’d finally tell me what’s been bothering him.
+
+!bg hall.jpg
+We walk around the CSE2 building, but I’m not paying much attention and before I know it we’re in some hallway that looks waaaaay older than the rest of the CSE2 building. I look forward and it’s just dark, I swiftly repeat this action by looking backward but again, it’s pitch black. I start feeling creeped out when we reach a room.
+
+!bg richard_s_secret_room.jpg
+
+The door looks very mossy, as if it’d been overgrown by plants. Richard opens the door and leads us in. Although I’m hesitant, I decide to trust my best friend.
+
+The room is… surprisingly normal, is what I wish I could’ve said. The floor, walls, and even ceiling is 100% covered in grass. There are no desks, nor is there a chalkboard. Vines drop down from the ceiling as well, it literally looks like a tropical forest. Richard sits on the floor, finally looking calm, as if he’d come home.
+
+“Hey, I know you’ve caught onto me, so I brought you out here to question you. Don’t even dare to lie since I’ll know”
+
+“What are you even saying, what did you do that I should’ve caught onto?” This dialogue, combined with the room… is he trying to play a prank?
+
+“Stop playing dumb, now I’ll start questioning you. Do you think I’m a threat to you?”
+
+“Uhhh”
+
+!choice stress
+
+# [Use this part to read brainwaves and have “yes/no” choice]
+!brain threat
+
+# [This part changes depending on thoughts (implicit choice) if wrong (if implicit (stress/non-stress) doesn’t
+# match the explicit choices (yes/no)) you die and restart the game, if you’re right you can move on]
+!cond threat 0 "You're lying," Richard says. He lunges at you and kills you.
+
+!cond thread 0 !gameover
+
+“Do you know what I am, and do you hate me?”
+
+“What you are? What’s that supposed to mean? And why would I hate you?” I’m amused by how Richard set all this prank up.
+
+“Fine, I guess you really don’t know anything about this, here’s the truth, I’m on a mission to kill all humans, as they’ve been wronging my species for centuries, but you’re getting in the way. You seem to have the power to revive, and reset the day you die while you’re at it. Thus we have two options, we can either kill you until this power runs out, or we can keep you alive as the only human left.”
+
+“.............................Can you not just leave humans alone?” Too naive. I’m not that gullible, but I’ll play along with you for now. You look kinda stressed out today after all.
+
+“LEAVE THEM ALONE?! YOU THINK OUR THIRST FOR REVENGE CAN BE QUENCHED BY A HALF-ASSED PLEA SUCH AS THAT?”
+
+“But why must you do this, what is this… species?” Damn, your acting skills are on another level man.
+
+“This is taking too long, my superiors are waiting for me to succeed, I must kill you now, I hope you understand.”
+
+“UNDERSTAND WHAT, TELL ME, PLEASE” Huh? Wait, why do I feel like I know this feeling? Deja vu? Sh*t, is there a possibility that this is not a prank? Why do I feel like I should run? But why can’t I move?
+
+I look down at my feet, only to find my ankles strapped by some vines. I struggle to get them off my legs, but they’re unexpectedly sturdy.
+
+“If your power hasn’t run out yet, and you revive again, come seek me out, and maybe with more time we can talk more things out. Goodbye, for now or forever, may fate decide.” Richard says coldly, but I can see a tinge of sadness in his eyes.
+
+!cond plant 0 “And this is also for not watering the plant.” Richard’s comment reminds me of my negligence. But seriously, just for that? But how spicy can this bastard get for such irrelevant stuff???
+
+Day 3:
+!bg dorm.jpg
+
+“RICHAAAARD!!!!!!!” I scream as I wake up once more, not from a dream, not from a deep sleep, but from my second death on the same day.
+
+My roommate mumbles something out of annoyance while I’m trying to wrap my head around this turmoil. It has become so clear now. Everyone has acted in the same way, except for Richard.
+
+I’m burning from the feeling of betrayal. My best friend, who… wtf do I even know about him. I don’t know where he’s dorming, nor what his major is. Now that I think about it, I know very little about him.
+
+Okay, I want to get to the bottom of this, and I don’t want to die again. Plus, who knows if dying this time means eternal sleep?
+
+It’s 8:55 right now, which means there are still about 2 hours before the Hackjam. From my previous experiences, apart from minute deviations, the events during those two days are similar. Wait, Richard seems to be the one who’s the most off. He will be the key.
+
+Great. Now, I have to approach a killer for the key. I don’t feel safe. Well, I might be dead soon anyway, so let’s give it a try.
+
+But still, I should be prepared. I’ll take some axes, a two-barreled shotgun, a machete, brick to throw, a flamethrower (Richard would hate this), and a couple of poison-gas grenades. Perfect.
+
+I dress in the most casual clothes I have to avoid attracting attention and head out. Weirdly, it’s a bit stuffy when I try to wear it over all the protections I carry, so I could only bring a pocket knife.
+
+!bg cse2_stalking.jpg
+
+Standing in front of the CSE2 building, a chill runs through my spine, shuddering my body slightly.
+
+Okay, now, I will be outside spying for Richard. When he arrives, I will find a chance to knock him out, tie him up, and interro… I mean, ask him kindly why he did what he did.
+
+…
+
+…
+
+…
+
+I wait for two hours, then three hours, but there is still no sign of Richard. Where the hell is this man?
+
+# [Implicit choice here: described in the belows]
+
+!brain building
+
+# [Choice 1: Choose not to go inside the building to look for Richard (if stress-level is too high)]
+
+!cond building 0 Okay, he might have noticed my activities. I cannot continue this investigation today here anymore. I’ll just look for him at other places. Worst-case scenario, I just have to confront him in the future.
+
+!cond building 0 !bg scuffedfoundtainedit.jpg
+
+!cond building 0 Narrator: Jack goes on finding Richard at other places but can’t track him down at all. In fact, Richard seems to have disappeared into the thin air. Although Jack has tried to warn the government to take actions to prevent human destruction, no one would take him seriously because there is no evidence. In the end, human civilization collapses and everyone dies, including Jack.
+
+!cond building 0 !gameover
+
+# [Choice 2: Choose to go inside the building to look for Richard (if stress-level is calm enough)]
+
+Does he just spawn inside the building before going to the Hackjam? Wait, that might be the case. I remember coming across a suspicious-looking room down the hall last time where Richard seemed to have behaved strangely. Richard might be in there. Richard must have realized my suspicion by now. I must be quick.
+
+!bg hall.jpg
+
+I charge into the building, up the stairs, and find my way to the room down the ominous hall. I barge into the room and find Richard.
+
+!bg richard_s_secret_room.jpg
+
+The room seems oddly empty.
+
+With his back facing me, my sudden appearance jolted Richard forward. He turned around; panic and surprise filling his eyes. He looks at the entrance and back at me. I realize what he’s trying to do and block the door as he dashes for it.
+
+“Oh no, you’re not running away so easily.” I grab Richard by the collar and push him hard against the wall, forcing him to face me squarely. I take a pocket knife out and press the cold blade against his throat.
+
+“Shit…” Richard tries to force an awkward smile as our gazes lock. I can see cold sweats rolling down his forehead.
+
+“I hope you are prepared for a proper talk, Richard.” Killing intent lacing in my words.
+
+Should I show some empathy for his and his kinds’ genocidal causes? I smirk at my thought. No way!
+
+But should I spare him because he’s my friend? It hurts to see what we have become when we used to be so close. Is there a way to resolve this without shedding blood?
+
+!choice sparekill
+
+# [Choice where Jack decides to spare Richard, happy ending]
+
+!cond sparekill 0 I look him in the eye, he seems genuinely scared, like a little puppy that’s getting scolded by their owner. I guess all living beings have the capacity to feel fear, no matter how powerful they really are. I lower my knife.
+
+!cond sparekill 0 “Hey, you know, we’ve been best friends for a while, and I think there are humans worth keeping around, not all of them are arsonists and the like. I really don’t want to kill you, and I don’t think you want to kill me, I can see the guilt has already been bothering you. Let’s call a truce, what do you say”
+
+!cond sparekill 0 “A truce, you say…” Richard ponders, he knows he could kill me at a moment’s notice, but he finally gets up and says “Yeah, I think I’d like that.”
+
+!cond sparekill 0 !bg redsquare.jpg
+
+!cond sparekill 0 Richard then goes on to explain how he’s actually a tree, and has many tree friends that are stationed around UW to kill as many humans of the upcoming generation as possible. He calls them off (after much persuading, of course-- it’s evident that these trees really hate humans). Life proceeds as normal.
+
+# [Choice where Jack decides to kill Richard, bad ending]
+
+!cond sparekill 1 I look him in the eye, he seems genuinely scared, like a little puppy that’s getting scolded by their owner. I guess all living beings have the capacity to feel fear, no matter how powerful they really are, but I don’t back down.
+
+!cond sparekill 1 “I know you’re a monster,” I tell him, “I know you’re capable of killing me with no weapons, WTF ARE YOU!” I scream at him.
+
+!cond sparekill 1 He just flinches and looks sad, “I’m a tree, and I- I hate humans, I wanted to kill them all… until you, you’re the first human who made me hesitate”
+
+!cond sparekill 1 “YOU’RE JUST TRYING TO GET ME TO LET MY GUARD DOWN AREN’T YOU” I scream, my trust for Richard had been thoroughly crushed, to the point where none was left.
+
+!cond sparekill 1 “I, I’m sorry, please just kill me, I deserve it” He mumbled, and so I did, my knife sliced clean through his neck, and I felt an immense satisfaction, accompanied by an immense sadness. I stood there for a couple of moments. “It’s finally over… I can move on, literally.” I mutter under my breath as I make my way out.
+
+!cond sparekill 1 !bg bloody_hallway.jpg
+
+!cond sparekill 1 But something is wrong. The halls are red. Were they always red? I can’t remember, I must be extremely tired. There are also skin-colored piles of… stuff everywhere. “Why are these here?” is my last thought before I look down and see a brown branch sticking out of my chest, and I die, never to wake up again.
