@@ -166,7 +166,7 @@ def create_outlet_stream(fs):
     return outlet
 
 def main():
-    stream = find_muse_stream()
+    stream = find_muse_stream(use_subprocess=True)
     start_stream(stream)
 
 if __name__ == "__main__":
