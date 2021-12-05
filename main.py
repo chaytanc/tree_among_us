@@ -4,6 +4,7 @@ from views import Background, ChoiceMenu, ConditionalView, TextView, BrainChoice
 
 from pylsl import StreamInlet, resolve_stream
 
+
 # first resolve an EEG stream on the lab network
 def get_inlet():
     print("looking for an EEG stream...")
@@ -11,20 +12,20 @@ def get_inlet():
     print("Streams", streams)
     for stream in streams:
         print("id", str(stream.source_id()))
-        if stream.source_id() == "stressdata":
-            inlet = StreamInlet(stream)
+        inlet = None
+        while(inlet == None):
+            if stream.source_id() == "stressdata":
+                inlet = StreamInlet(stream)
     return inlet
 
+# inlet = get_inlet()
 
-inlet = get_inlet()
 
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
 running = True
 
-
 clock = pygame.time.Clock()
-
 
 ALL_CHOICES = {
     'plant': ChoiceMenu("plant", ["Don't water the plants",
@@ -32,6 +33,7 @@ ALL_CHOICES = {
     'sparekill': ChoiceMenu("sparekill", ["Spare your friend", "Kill him"]),
     'stress': ChoiceMenu("stress", ["No it's chill between us", "Yeah you stress me out"])
 }
+
 
 def parse_line(line):
     line = line.strip()
@@ -59,6 +61,7 @@ def parse_line(line):
     else:
         return line
 
+
 def read_script(filename):
     all_texts = []
     row = ""
@@ -79,6 +82,7 @@ def read_script(filename):
     if len(row.strip()) > 0:
         all_texts.append(TextView(row.strip()))
     return all_texts
+
 
 slides = read_script('script.txt')
 # script commands
@@ -101,9 +105,9 @@ sample = [1, 1, 1]
 while running:
     dt = clock.tick(90)
 
-    c_sample, c_timestamp = inlet.pull_sample(timeout=0)
-    if c_sample is not None:
-        sample, timestamp = c_sample, c_timestamp
+    # c_sample, c_timestamp = inlet.pull_sample(timeout=0)
+    # if c_sample is not None:
+    #     sample, timestamp = c_sample, c_timestamp
 
     if isinstance(slide, ConditionalView) or \
        isinstance(slide, BrainChoice):
