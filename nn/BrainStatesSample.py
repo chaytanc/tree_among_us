@@ -51,4 +51,4 @@ class BrainStatesSample():
 
 
     def __str__(self):
-        return(str(self.averaged_readings))
+        return str(self.averaged_readings)
