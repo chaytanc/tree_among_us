@@ -25,8 +25,9 @@ class BrainStatesDataset(Dataset):
         else:
             # 20 seconds prior used to predict choice
             self.SAMPLE_LEN = 20
-            self.NUM_CHOICES = 4
-            self.NUM_OPTIONS = 4
+            #XXX just changed
+            self.NUM_CHOICES = 6
+            self.NUM_OPTIONS = 2
             self.NUM_READING_METRICS = 3
         self.brain_states = self.add_sample_choice_pairs(brain_states_csv, choices_csv)
         # self.transform = transforms.Compose([transforms.ToTensor()])
@@ -50,12 +51,15 @@ class BrainStatesDataset(Dataset):
                     # associated with brain states before a choice
                     if len(sample) == self.SAMPLE_LEN:
                         sample.avg_readings()
+                        sample.add_choice_number()
                         samples.append(sample)
                         # Reset the sample we're creating
-                        sample = BrainStatesSample(num_reading_metrics=self.NUM_READING_METRICS, sample_len=self.SAMPLE_LEN)
+                        sample = BrainStatesSample(num_reading_metrics=self.NUM_READING_METRICS,
+                                                   sample_len=self.SAMPLE_LEN)
 
         with open(choices_file, "r") as f:
-            choices = self.one_hot_encode_choices(f.readlines())
+            # choices = self.one_hot_encode_choices(f.readlines())
+            choices = self.make_choices(f.readlines())
 
         assert(len(choices) == self.NUM_CHOICES)
         assert(len(samples) == len(choices))
@@ -63,9 +67,13 @@ class BrainStatesDataset(Dataset):
         arr = list(map(list, zip(samples, choices)))
         return arr
 
+    #
+    # def one_hot_encode_choices(self, choices_data):
+    #     choices = [Choice(letter, num_options=self.NUM_OPTIONS) for letter in choices_data]
+    #     return choices
 
-    def one_hot_encode_choices(self, choices_data):
-        choices = [Choice(letter, num_options=self.NUM_OPTIONS) for letter in choices_data]
+    def make_choices(self, choices_rows):
+        choices = [Choice(choice_row, num_options=self.NUM_OPTIONS) for choice_row in choices_rows]
         return choices
 
 
@@ -85,6 +93,8 @@ class BrainStatesDataset(Dataset):
         assert(len(self.brain_states[idx]) == 2)
         # no type casting in python
         #sample_choice_pair = ([BrainStatesSample, Choice]) self.brain_states[idx]
+        #XXX note that we don't currently incorporate choice_number into predictions / labels
+        # but that we do in averaged_readings
         item = [torch.Tensor(self.brain_states[idx][0].averaged_readings),
                 torch.Tensor(self.brain_states[idx][1].choice)]
         return item

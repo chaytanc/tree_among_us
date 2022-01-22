@@ -13,7 +13,7 @@ class BrainStatesSample():
 
     def __init__(self, num_reading_metrics=3, sample_len=20):
         # Should be full of SAMPLE_LEN number of BrainStateReadings
-        self.raw_readings = []
+        self.raw_readings: [BrainStateReading] = []
         # The 20 (or whatever SAMPLE_LEN is) readings per sample are condensed to one averaged array
         # so that it looks like [avg_alpha, avg_beta, avg_gamma]
         self.averaged_readings = []
@@ -24,7 +24,7 @@ class BrainStatesSample():
 
     def add_reading(self, *args):
         assert(len(*args) == self.NUM_READING_METRICS)
-        reading = BrainStateReading(*args)
+        reading = BrainStateReading(*args)  # pass a line of the data
         self.raw_readings.append(reading)
 
 
@@ -39,6 +39,10 @@ class BrainStatesSample():
         avged = [x / self.SAMPLE_LEN for x in sums]
         self.averaged_readings = avged
         self.checkrep()
+
+
+    def add_choice_number(self):
+        self.averaged_readings.append(self.raw_readings.choice_number)
 
 
     def __len__(self):

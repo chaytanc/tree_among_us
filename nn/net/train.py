@@ -8,13 +8,13 @@ import wandb
 from Dict2Class import Dict2Class
 
 # Paths
-TRAINSET_BRAIN_STATES = "./data/fake_readings.csv"
-TESTSET_BRAIN_STATES = "data/fake_readings.csv"
-VALIDSET_BRAIN_STATES = "data/fake_readings.csv"
-TRAINSET_CHOICES = "data/fake_choices.csv"
-TESTSET_CHOICES = "data/fake_choices.csv"
-VALIDSET_CHOICES = "data/fake_choices.csv"
-MODEL_PATH = "./choice_pred_net.pth"
+TRAINSET_BRAIN_STATES = "../data/fake_readings.csv"
+TESTSET_BRAIN_STATES = "../data/fake_readings.csv"
+VALIDSET_BRAIN_STATES = "../data/fake_readings.csv"
+TRAINSET_CHOICES = "../data/fake_choices.csv"
+TESTSET_CHOICES = "../data/fake_choices.csv"
+VALIDSET_CHOICES = "../data/fake_choices.csv"
+MODEL_PATH = "choice_pred_net.pth"
 
 # Settings
 PRINT_RATE = 3
@@ -24,8 +24,9 @@ WB = True
 # Settings for BrainStatesDataset
 dataset_settings = dict(
     sample_len=20,
-    num_choices=4,
-    num_options=4,
+    #XXX just changed
+    num_choices=2,
+    num_options=6,
     num_reading_metrics=3,
 )
 
@@ -68,7 +69,7 @@ def model_pipeline(hyperparameters):
     return model
 
 
-#XXX note that config is wandb object that can be dot referenced
+# Config should be dot-referenceable object
 def make(config):
 
     # Brain states 20 seconds before each choice and the corresponding choice made

@@ -2,8 +2,7 @@ import unittest
 import sys
 
 sys.path.append('../')
-from BrainStatesDataset import BrainStatesDataset
-import torch
+from net.BrainStatesDataset import BrainStatesDataset
 
 TRAINSET_BRAIN_STATES = "../data/fake_readings.csv"
 TRAINSET_CHOICES = "../data/fake_choices.csv"
