@@ -2,21 +2,21 @@ import pygame
 import pygame.freetype  # Import the freetype module.
 from views import Background, ChoiceMenu, ConditionalView, TextView
 
-# from pylsl import StreamInlet, resolve_stream
+from pylsl import StreamInlet, resolve_stream
 
-# # first resolve an EEG stream on the lab network
-# def get_inlet():
-#     print("looking for an EEG stream...")
-#     streams = resolve_stream('type', 'EEG')
-#     print("Streams", streams)
-#     for stream in streams:
-#         print("id", str(stream.source_id()))
-#         if stream.source_id() == "stressdata":
-#             inlet = StreamInlet(stream)
-#     return inlet
+# first resolve an EEG stream on the lab network
+def get_inlet():
+    print("looking for an EEG stream...")
+    streams = resolve_stream('type', 'EEG')
+    print("Streams", streams)
+    for stream in streams:
+        print("id", str(stream.source_id()))
+        if stream.source_id() == "stressdata":
+            inlet = StreamInlet(stream)
+    return inlet
 
 
-# inlet = get_inlet()
+inlet = get_inlet()
 
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
@@ -76,8 +76,14 @@ if isinstance(slide, Background):
 
 choice_states = { }
 
+sample = [1, 1, 1]
+
 while running:
     dt = clock.tick(90)
+
+    c_sample, c_timestamp = inlet.pull_sample(timeout=0)
+    if c_sample is not None:
+        sample, timestamp = c_sample, c_timestamp
 
     if isinstance(slide, ConditionalView):
         slide.update_state(choice_states)
@@ -92,8 +98,11 @@ while running:
             else:
                 slide.process_event(event)
 
-    screen.fill((40, 40, 40))
-    background.render(screen, dt)
+    s = sample[1]
+    c = s*200
+
+    screen.fill((0+c, 0+c, 0+c))
+    # background.render(screen, dt)
     slide.render(screen, dt)
     pygame.display.flip()
 
