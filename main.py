@@ -2,6 +2,7 @@ import pygame
 import pygame.freetype  # Import the freetype module.
 from views import Background, ChoiceMenu, ConditionalView, TextView, BrainChoice, Audio, Gameover
 from datetime import datetime
+import os
 
 from pylsl import StreamInlet, resolve_stream
 import csv
@@ -15,9 +16,8 @@ def get_inlet():
     for stream in streams:
         print("id", str(stream.source_id()))
         inlet = None
-        while(inlet == None):
-            if stream.source_id() == "stressdata":
-                inlet = StreamInlet(stream)
+        if stream.source_id() == "stressdata":
+            inlet = StreamInlet(stream)
     return inlet
 
 inlet = get_inlet()

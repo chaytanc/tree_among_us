@@ -158,9 +158,10 @@ The room is… surprisingly normal, is what I wish I could’ve said. The floor,
 
 # [This part changes depending on thoughts (implicit choice) if wrong (if implicit (stress/non-stress) doesn’t
 # match the explicit choices (yes/no)) you die and restart the game, if you’re right you can move on]
+
 !cond threat 0 "You're lying," Richard says. He lunges at you and kills you.
 
-!cond thread 0 !gameover
+!cond threat 0 !gameover
 
 “Do you know what I am, and do you hate me?”
 
