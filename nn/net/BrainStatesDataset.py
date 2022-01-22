@@ -3,6 +3,10 @@ from torch.utils.data import Dataset
 from BrainStatesSample import BrainStatesSample
 from Choice import Choice
 
+import sys
+sys.path.append("../")
+import data
+
 
 # Abstraction Function
 # sample_len is the number of readings we take for predicting each choice, for example if we measure

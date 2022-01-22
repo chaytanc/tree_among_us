@@ -8,26 +8,26 @@ import wandb
 from Dict2Class import Dict2Class
 
 # Paths
-TRAINSET_BRAIN_STATES = "../data/fake_readings.csv"
-TESTSET_BRAIN_STATES = "../data/fake_readings.csv"
-VALIDSET_BRAIN_STATES = "../data/fake_readings.csv"
-TRAINSET_CHOICES = "../data/fake_choices.csv"
-TESTSET_CHOICES = "../data/fake_choices.csv"
-VALIDSET_CHOICES = "../data/fake_choices.csv"
+TRAINSET_BRAIN_STATES = "./data/fake_readings.csv"
+TESTSET_BRAIN_STATES = "./data/fake_readings.csv"
+VALIDSET_BRAIN_STATES = "./data/fake_readings.csv"
+TRAINSET_CHOICES = "./data/fake_choices.csv"
+TESTSET_CHOICES = "./data/fake_choices.csv"
+VALIDSET_CHOICES = "./data/fake_choices.csv"
 MODEL_PATH = "choice_pred_net.pth"
 
 # Settings
 PRINT_RATE = 3
 NUM_WORKERS = 0
-WB = True
+WB = False
 
 # Settings for BrainStatesDataset
 dataset_settings = dict(
     sample_len=20,
-    #XXX just changed
-    num_choices=2,
-    num_options=6,
+    num_choices=6,
+    num_options=2,
     num_reading_metrics=3,
+    choices_row_length=4,
 )
 
 # Hyperparameters
@@ -85,7 +85,7 @@ def make(config):
     # What happens when in real life you no longer have the labels and just have
     # the the brain_states and no choices
 
-    net = Net()
+    net = Net(dataset_settings['choices_row_length'], dataset_settings['num_options'])
 
     # loss function to minimize classification models
     # logarithmic loss function w smaller penalty for small diffs,

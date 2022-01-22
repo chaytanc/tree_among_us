@@ -23,7 +23,7 @@ class BrainStatesSample():
 
 
     def add_reading(self, *args):
-        assert(len(*args) == self.NUM_READING_METRICS)
+        assert(len(*args) == self.NUM_READING_METRICS + 1)
         reading = BrainStateReading(*args)  # pass a line of the data
         self.raw_readings.append(reading)
 
@@ -41,8 +41,9 @@ class BrainStatesSample():
         self.checkrep()
 
 
+    # Assumes that choice_number is the same for every reading in the sample
     def add_choice_number(self):
-        self.averaged_readings.append(self.raw_readings.choice_number)
+        self.averaged_readings.append(self.raw_readings[0].choice_number)
 
 
     def __len__(self):
