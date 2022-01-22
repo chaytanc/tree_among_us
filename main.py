@@ -1,8 +1,10 @@
 import pygame
 import pygame.freetype  # Import the freetype module.
 from views import Background, ChoiceMenu, ConditionalView, TextView, BrainChoice, Audio, Gameover
+from datetime import datetime
 
 from pylsl import StreamInlet, resolve_stream
+import csv
 
 
 # first resolve an EEG stream on the lab network
@@ -34,6 +36,8 @@ ALL_CHOICES = {
     'stress': ChoiceMenu("stress", ["No it's chill between us", "Yeah you stress me out"])
 }
 
+choice_list = ['alpha', 'plant', 'stress', 'threat', 'building', 'sparekill']
+choice_numbers = dict(zip(choice_list, range(len(choice_list))))
 
 pygame.mixer.music.load('audio/background.wav')
 pygame.mixer.music.play(-1)
@@ -93,6 +97,16 @@ def read_script(filename):
         all_texts.append(TextView(row.strip()))
     return all_texts
 
+d = datetime.now().strftime('%Y-%m-%d--%H-%M-%S')
+fname_choices = os.path.join('temp', d + '_choices.csv')
+fname_readings = os.path.join('temp', d + '_readings.csv')
+
+writer_choices = open(fname_choices, 'w')
+writer_readings = open(fname_readings, 'w')
+
+csv_choices = csv.writer(writer_choices)
+csv_readings = csv.writer(writer_readings)
+
 
 slides = read_script('script.txt')
 # script commands
@@ -112,12 +126,16 @@ choice_states = { }
 
 sample = [1, 1, 1]
 
+samples = []
+
 while running:
     dt = clock.tick(120)
 
     c_sample, c_timestamp = inlet.pull_sample(timeout=0)
     if c_sample is not None:
         sample, timestamp = c_sample, c_timestamp
+        samples.append(sample)
+        samples = samples[-20:]
 
     if isinstance(slide, ConditionalView) or \
        isinstance(slide, BrainChoice):
@@ -150,8 +168,23 @@ while running:
         if isinstance(slide, ChoiceMenu):
             choice_states[slide.choice_id] = slide.selected
             print(choice_states)
+        if isinstance(slide, ChoiceMenu) or \
+           isinstance(slide, BrainChoice):
+            cnum = choice_numbers[slide.choice_id]
+            row = [slide.selected, cnum]
+            csv_choices.writerow(row)
+            writer_choices.flush()
+            for sample in samples:
+                csv_readings.writerow(sample + [cnum])
+            writer_readings.write("\n")
+            writer_readings.flush()
+
         slide_ix += 1
         slide = slides[slide_ix]
         if isinstance(slide, Background):
             background = slide
+
+writer_choices.close()
+writer_readings.close()
+
 pygame.quit()

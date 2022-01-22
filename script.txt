@@ -9,8 +9,6 @@
 
 (Sleep)
 
-!gameover
-
 *yawn* “Ok, let’s wake up for real this time.” I reach out for my phone and check the time.
 
 “Shit... It’s 30 minutes already?! I’ll be late for the Hackjam.”
