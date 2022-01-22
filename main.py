@@ -1,6 +1,6 @@
 import pygame
 import pygame.freetype  # Import the freetype module.
-from views import Background, ChoiceMenu, ConditionalView, TextView, BrainChoice
+from views import Background, ChoiceMenu, ConditionalView, TextView, BrainChoice, Audio, Gameover
 
 from pylsl import StreamInlet, resolve_stream
 
@@ -35,6 +35,9 @@ ALL_CHOICES = {
 }
 
 
+pygame.mixer.music.load('audio/background.wav')
+pygame.mixer.music.play(-1)
+
 def parse_line(line):
     line = line.strip()
     if len(line) > 0 and line[0] == '#':
@@ -45,6 +48,13 @@ def parse_line(line):
     elif line[:7] == "!choice":
         choice = line.split(' ')[1]
         return ALL_CHOICES[choice]
+    elif line[:6] == "!audio":
+        fname = line.split(' ')[1]
+        return Audio(fname)
+    elif line[:9] == "!gameover":
+        return Gameover(good=False)
+    elif line[:8] == "!endgame":
+        return Gameover(good=True)
     elif line[:5] == "!cond":
         L = line.split(' ')
         choice_id = L[1]
@@ -103,7 +113,7 @@ choice_states = { }
 sample = [1, 1, 1]
 
 while running:
-    dt = clock.tick(90)
+    dt = clock.tick(120)
 
     c_sample, c_timestamp = inlet.pull_sample(timeout=0)
     if c_sample is not None:
@@ -129,7 +139,6 @@ while running:
 
     s = sample[1]
     c = s*200
-
 
     # screen.fill((0+c, 0+c, 0+c))
     background.render(screen, dt)

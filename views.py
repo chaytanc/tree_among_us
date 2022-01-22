@@ -5,7 +5,8 @@ import pygame
 class Background():
     def __init__(self, imgname):
         path = os.path.join('bg', imgname)
-        self.surface = pygame.image.load(path)
+        surf = pygame.image.load(path)
+        self.surface = pygame.transform.scale(surf, (1920, 1080))
         self.imgname = imgname
         self.done = False
 
@@ -17,14 +18,14 @@ class Background():
         pass
 
 char_pause = {
-    '?': 200,
-    '!': 200,
-    '.': 150,
-    ',': 100,
-    '(': 50,
-    ')': 50,
+    '?': 20,
+    '!': 20,
+    '.': 15,
+    ',': 10,
+    '(': 5,
+    ')': 5,
 }
-default_pause = 5
+default_pause = 2
 
 text_counter = 0
 
@@ -167,4 +168,38 @@ class BrainChoice():
         pass
 
     def render(self, screen, dt=1/60.0):
+        pass
+
+
+class Audio():
+    def __init__(self, fname):
+        self.fname = fname
+        self.sound = pygame.mixer.Sound(os.path.join("audio", self.fname))
+        self.done = False
+
+    def process_event(self, event):
+        pass
+
+    def render(self, screen, dt=1/60.0):
+        print('playing sound', self.fname)
+        pygame.mixer.Sound.play(self.sound)
+        self.done = True
+
+
+class Gameover():
+    def __init__(self, good=False):
+        if good:
+            imgname = "survived.jpg"
+        else:
+            imgname = "gameover.jpg"
+        path = os.path.join('bg', imgname)
+        surf = pygame.image.load(path)
+        self.surface = pygame.transform.scale(surf, (1920, 1080))
+        self.imgname = imgname
+        self.done = False
+
+    def render(self, screen, dt=0):
+        screen.blit(self.surface, (0,0))
+
+    def process_event(self, event):
         pass

@@ -1,14 +1,15 @@
 !bg dorm.jpg
 
-*sound alarm*
 
-*background music’s loop*
+!audio alarm.wav
 
 *Beep Beep* (Alarm sounding)
 
 “Ughh, is it 9 already? I'll sleep just a bit more.”
 
 (Sleep)
+
+!gameover
 
 *yawn* “Ok, let’s wake up for real this time.” I reach out for my phone and check the time.
 
@@ -18,7 +19,9 @@ I climb down the bed, put on my clothes, and brush my teeth. Good. This should d
 A notification pops up on my phone saying, “... Hackjam starts at 11…”
 “Damn, I just woke up early for nothing then. Well, at least now I have more time for myself.”
 
-If it’s at 11, I should have at least an hour to myself then. By instinct, I turn the TV on and leave it on in the background. I boil some water and pour it over the oatmeal. Perfect option for breakfast to start the day. Having Instagram open next to my Oatmeal, I try to complete my scrolling ritual.
+If it’s at 11, I should have at least an hour to myself then. By instinct, I turn the TV on and leave it on in the background. I boil some water and pour it over the oatmeal. Perfect option for breakfast to start the day.
+
+Having Instagram open next to my Oatmeal, I try to complete my scrolling ritual.
 
 “Huh?” A piece of news caught my attention. It reads, “Man found dead impaled horrendously by a tree’s branches.” That’s kinda weird, but okay.
 
@@ -63,11 +66,23 @@ The rest of that day proceeds as it should. We come up with grandiose ideas and 
 
 I’m about to make some side jokes about how everyone will die after the light is on again when I hear someone’s grunt and a loud thud.
 
-*Grunting*
-1second gap
-*Body_thud sound*
+!audio grunt.wav
 
-Immediately after, like a chain of reaction, one thud starts another thud.((*Grunting* + short delay (0.1s/0.2s?) *Body_thud sound*)x5) I only realize it’s the people in the room collapsing onto the ground when my groupmates fall down before me. Then, silence fills the room.
+......
+
+!audio thud.wav
+
+*thud*
+
+!audio grunt.wav
+
+!audio thud.wav
+
+*more thud*
+
+Immediately after, like a chain of reaction, one thud starts another thud.
+
+I only realize it’s the people in the room collapsing onto the ground when my groupmates fall down before me. Then, silence fills the room.
 
 “Richard? Where is Richard?” I frantically searched for him. It was me who pulled him here today. Damn it. Suddenly, the light returns to the room.
 
@@ -79,7 +94,8 @@ I look down at my chest, or where it’s supposed to have been, at the scabrous 
 
 “Ugghhh…” I struggle to mutter a groan. My breath staggers. My knees collapse, and I fall flat onto the floor. My eyelids are feeling heavier and heavier. My vision is blurring. Richard? Is that you? Thank goodness, you’re fine…
 
-Day 2:
+**Day 2**
+
 !bg dorm.jpg
 
 I bolt awake and jump up. “AAAHHHH!” I yell, effectively waking my roommate. “Fucking sissy” I hear my roommate mutter before flipping the other way and going back to sleep. I rummage around my bed before realizing my phone had also dropped to the floor. Great, everything is going splendidly. I climb down and check my phone, but something feels off.
@@ -94,7 +110,7 @@ It was probably just a bizarre dream, I reason with myself. Some crazy detailed 
 
 I leave the building at 10:40, and get to the Hackjam right on the dot. Haruto and some others are there, but none of the normal members are here yet. “Hey! Welcome to the Hackjam, here’re a couple of stickers and the schedule!”
 
-[Haruto asks, “Hey, are you doing ok?” if the reader is stressed, and then a “Yeah, I’m ok” I say absent-mindedly in response]
+# [Haruto asks, “Hey, are you doing ok?” if the reader is stressed, and then a “Yeah, I’m ok” I say absent-mindedly in response]
 
 I nod in appreciation, take the goodies, and make my way to my usual seat, just like yesterday. Wait, I mean just like in my dream. I feel out of it, but no one needs to know that. Everyone starts coming in, but I don’t see my best friend, Richard.
 
@@ -120,6 +136,7 @@ Richard calls out to me, asking to walk out for a second.
 “Sure” I answer, wondering if he’d finally tell me what’s been bothering him.
 
 !bg hall.jpg
+
 We walk around the CSE2 building, but I’m not paying much attention and before I know it we’re in some hallway that looks waaaaay older than the rest of the CSE2 building. I look forward and it’s just dark, I swiftly repeat this action by looking backward but again, it’s pitch black. I start feeling creeped out when we reach a room.
 
 !bg richard_s_secret_room.jpg
@@ -169,7 +186,8 @@ I look down at my feet, only to find my ankles strapped by some vines. I struggl
 
 !cond plant 0 “And this is also for not watering the plant.” Richard’s comment reminds me of my negligence. But seriously, just for that? But how spicy can this bastard get for such irrelevant stuff???
 
-Day 3:
+**Day 3**
+
 !bg dorm.jpg
 
 “RICHAAAARD!!!!!!!” I scream as I wake up once more, not from a dream, not from a deep sleep, but from my second death on the same day.
@@ -193,8 +211,6 @@ I dress in the most casual clothes I have to avoid attracting attention and head
 Standing in front of the CSE2 building, a chill runs through my spine, shuddering my body slightly.
 
 Okay, now, I will be outside spying for Richard. When he arrives, I will find a chance to knock him out, tie him up, and interro… I mean, ask him kindly why he did what he did.
-
-…
 
 …
 
@@ -254,6 +270,8 @@ But should I spare him because he’s my friend? It hurts to see what we have be
 
 !cond sparekill 0 Richard then goes on to explain how he’s actually a tree, and has many tree friends that are stationed around UW to kill as many humans of the upcoming generation as possible. He calls them off (after much persuading, of course-- it’s evident that these trees really hate humans). Life proceeds as normal.
 
+!cond sparekill 0 !endgame
+
 # [Choice where Jack decides to kill Richard, bad ending]
 
 !cond sparekill 1 I look him in the eye, he seems genuinely scared, like a little puppy that’s getting scolded by their owner. I guess all living beings have the capacity to feel fear, no matter how powerful they really are, but I don’t back down.
@@ -269,3 +287,5 @@ But should I spare him because he’s my friend? It hurts to see what we have be
 !cond sparekill 1 !bg bloody_hallway.jpg
 
 !cond sparekill 1 But something is wrong. The halls are red. Were they always red? I can’t remember, I must be extremely tired. There are also skin-colored piles of… stuff everywhere. “Why are these here?” is my last thought before I look down and see a brown branch sticking out of my chest, and I die, never to wake up again.
+
+!gameover
