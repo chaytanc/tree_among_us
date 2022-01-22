@@ -5,10 +5,9 @@ class Choice():
 
     def __init__(self, choice_row,num_options=4):
         self.NUM_OPTIONS = num_options
-        #XXX add which choice it was column
-        self.choice = choice_row[0]
+        # self.choice = int(choice_row[0])
+        self.choice = self.encode(choice_row[0])
         self.choice_number = choice_row[-1]
-        # self.choice = self.encode()
         self.checkrep()
 
 
@@ -26,10 +25,13 @@ class Choice():
     #         raise ValueError("letter is not a supported Choice")
     #     return choice
 
+    def encode(self, which_choice):
+        encoded_choice = [0 for x in range(self.NUM_OPTIONS)]
+        encoded_choice[int(which_choice)] = 1
+        return encoded_choice
 
     def checkrep(self):
-        # assert(len(self.choice) == self.NUM_OPTIONS)
-        assert(self.choice < self.NUM_OPTIONS)
+        assert(len(self.choice) == self.NUM_OPTIONS)
 
 
     def __str__(self):
