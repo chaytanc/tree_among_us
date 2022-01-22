@@ -150,12 +150,16 @@ class BrainChoice():
     def update_eeg_sample(self, sample):
         self.sample = sample
 
-        stressed = self.sample[1] > 1.3 # stressed
+        stressed = self.sample[1] > 1.1 # stressed
 
         if self.choice_id == "threat":
             chose_stressed = self.state['stress'] == 1
-            self.selected = stressed * chose_stressed
-
+            if (stressed and chose_stressed) or \
+               (not stressed and not chose_stressed):
+                self.selected = 1
+            else:
+                self.selected = 0
+            # self.selected = stressed * chose_stressed
         elif self.choice_id == "building":
             self.selected = 1 - stressed
 
