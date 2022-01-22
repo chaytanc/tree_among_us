@@ -1,0 +1,22 @@
+{
+    "os": "macOS-10.16-x86_64-i386-64bit",
+    "python": "3.8.12",
+    "heartbeatAt": "2021-12-21T00:30:17.206887",
+    "startedAt": "2021-12-21T00:30:13.879645",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/Users/chaytan/Desktop/synaptech/tree_among_us/nn/nn.py",
+    "codePath": "nn/nn.py",
+    "git": {
+        "remote": "https://github.com/chaytanc/hiddentree.git",
+        "commit": "4ebd532dae6936bf41a684fb40f0e44a8bb67e37"
+    },
+    "email": "35582442+chaytanc@users.noreply.github.com",
+    "root": "/Users/chaytan/Desktop/synaptech/tree_among_us",
+    "host": "clank",
+    "username": "chaytan",
+    "executable": "/Users/chaytan/opt/anaconda3/envs/muse_env/bin/python"
+}

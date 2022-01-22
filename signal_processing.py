@@ -42,7 +42,7 @@ SHIFT_LENGTH = EPOCH_LENGTH - OVERLAP_LENGTH
 
 # Index of the channel(s) (electrodes) to be used
 # 0 = left ear, 1 = left forehead, 2 = right forehead, 3 = right ear
-INDEX_CHANNEL = [0]
+INDEX_CHANNEL = [1]
 
 # Make sure muse can be found / is paired
 def find_muse_stream(use_subprocess=False):
@@ -140,21 +140,31 @@ def compute_metrics(smooth_band_powers):
     # divided by delta waves in order to rule out noise
     alpha_metric = smooth_band_powers[Band.Alpha] / \
         smooth_band_powers[Band.Delta]
-    print('Alpha Relaxation: ', alpha_metric)
+    # print('Alpha Relaxation: ', alpha_metric)
 
      # Beta Protocol:
      # Beta waves have been used as a measure of mental activity and concentration
      # This beta over theta ratio is commonly used as neurofeedback for ADHD
     beta_metric = smooth_band_powers[Band.Beta] / \
          smooth_band_powers[Band.Theta]
-    print('Beta Concentration: ', beta_metric)
+    # print('Beta Concentration: ', beta_metric)
 
     # Alpha/Theta Protocol:
     # This is another popular neurofeedback metric for stress reduction
     # Higher theta over alpha is supposedly associated with reduced anxiety
     theta_metric = smooth_band_powers[Band.Theta] / \
         smooth_band_powers[Band.Alpha]
-    print('Theta Relaxation: ', theta_metric)
+    # print('Theta Relaxation: ', theta_metric)
+    #
+    print("alpha: {:.4f}  beta: {:.4f}  delta: {:.3f}  theta: {:.4f}".format(
+        smooth_band_powers[Band.Alpha],
+        smooth_band_powers[Band.Beta],
+        smooth_band_powers[Band.Delta],
+        smooth_band_powers[Band.Theta]))
+
+    print("alpha/delta: {:.4f}  beta/theta: {:.3f}  theta/alpha: {:.4f}".format(
+        alpha_metric, beta_metric, theta_metric))
+    print()
     return alpha_metric, beta_metric, theta_metric
 
 def create_outlet_stream(fs):
@@ -166,7 +176,7 @@ def create_outlet_stream(fs):
     return outlet
 
 def main():
-    stream = find_muse_stream()
+    stream = find_muse_stream(use_subprocess=True)
     start_stream(stream)
 
 if __name__ == "__main__":
