@@ -1,3 +1,7 @@
+import os
+import re
+import sys
+
 import torch
 from torch import nn
 import torch.optim as optim
@@ -8,12 +12,16 @@ import wandb
 from Dict2Class import Dict2Class
 
 # Paths
+# print(os.getcwd())
+# working_dir = os.getcwd()
 TRAINSET_BRAIN_STATES = "./data/fake_readings.csv"
 TESTSET_BRAIN_STATES = "./data/fake_readings.csv"
 VALIDSET_BRAIN_STATES = "./data/fake_readings.csv"
 TRAINSET_CHOICES = "./data/fake_choices.csv"
 TESTSET_CHOICES = "./data/fake_choices.csv"
 VALIDSET_CHOICES = "./data/fake_choices.csv"
+TRAIN_DIR = "./data/"
+TEST_DIR = "./data/"
 MODEL_PATH = "choice_pred_net.pth"
 
 # Settings
@@ -68,6 +76,39 @@ def model_pipeline(hyperparameters):
 
     return model
 
+# given a dir, get all *_readings and all *_choices, combine into a single csv for each
+def concat_data(data_dir):
+    readings = data_dir + "/readings.csv"
+    choices = data_dir + "/choices.csv"
+    files = os.listdir(data_dir)
+    for f in files:
+
+        # get the beginning readings pattern, match with a choices file, write to both
+        if f.endswith("readings.csv"):
+            date_pattern = f.split("readings.csv")[0] + r"[a-zA-Z0-9]*choices.csv"
+            matches = [file for file in files if re.match(date_pattern, file)]
+            # If we only have one choices csv matching the timestamped reading csv
+            # and the match is not the choices.csv file itself, if that exists
+            # then open the readings file and append to the concat readings file
+            # and after that open the choices file and append to it
+            if len(matches) == 1 and \
+                    (not os.path.exists(choices) or not os.path.samefile(data_dir + matches[0], choices)):
+                with open(readings, "a+") as readings_file:
+                    with open(data_dir + f, "r") as f:
+                        for line in f.readlines():
+                            readings_file.write(line)
+                        f.close()
+                    readings_file.close()
+
+                # Open matching choices file, readlines, write all lines to choices
+                with open(choices, "a+") as choices_file:
+                    with open(data_dir + matches[0], "r") as c:
+                        for line in c.readlines():
+                            choices_file.write(line)
+                        c.close()
+                    choices_file.close()
+
+    return readings, choices
 
 # Config should be dot-referenceable object
 def make(config):
@@ -80,8 +121,15 @@ def make(config):
                                 shuffle=True, num_workers=NUM_WORKERS)
         return dataloader
 
-    testset = load_data(TESTSET_BRAIN_STATES, TESTSET_CHOICES, dataset_settings)
-    trainset = load_data(TRAINSET_BRAIN_STATES, TRAINSET_CHOICES, dataset_settings)
+    train_readings, train_choices = concat_data(TRAIN_DIR)
+    test_readings, test_choices = concat_data(TEST_DIR)
+
+    # testset = load_data(TESTSET_BRAIN_STATES, TESTSET_CHOICES, dataset_settings)
+    # trainset = load_data(TRAINSET_BRAIN_STATES, TRAINSET_CHOICES, dataset_settings)
+
+    testset = load_data(test_readings, test_choices, dataset_settings)
+    trainset = load_data(train_readings, train_choices, dataset_settings)
+
     # What happens when in real life you no longer have the labels and just have
     # the the brain_states and no choices
 

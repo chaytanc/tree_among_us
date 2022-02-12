@@ -1,11 +1,29 @@
+import os
 import unittest
 import sys
 
 sys.path.append('../')
+sys.path.append('./net/')
 from net.BrainStatesDataset import BrainStatesDataset
+import net.train as train
 
-TRAINSET_BRAIN_STATES = "../data/fake_readings.csv"
-TRAINSET_CHOICES = "../data/fake_choices.csv"
+# ASSUMES we're running from nn rootdir
+TRAINSET_BRAIN_STATES = "./data/fake_readings.csv"
+TRAINSET_CHOICES = "./data/fake_choices.csv"
+TRAIN_DIR = "./data/"
+
+class TestPreprocess(unittest.TestCase):
+
+
+    def setUp(self) -> None:
+        os.remove("./data/choices.csv")
+        os.remove("./data/readings.csv")
+
+    def test_concat_data(self):
+        readings, choices = train.concat_data(TRAIN_DIR)
+        self.data = BrainStatesDataset(readings, choices)
+        pred_len = 7
+        self.assertEqual(pred_len, len(self.data.brain_states))
 
 
 class TestData(unittest.TestCase):
@@ -17,7 +35,7 @@ class TestData(unittest.TestCase):
     # (aka, fake_readings has around 80 lines and 2 measurements per line)
     def test_raw_data_size(self):
         # supposed data = [[[[5, 5, 5], [8, 3, 5], ... 20th brain state], [1, 0, 0, 0]], ... [brain states, 4th choice]]
-        pred_len = 4
+        pred_len = 6
         self.assertEqual(pred_len, len(self.data.brain_states))
 
     def test_averaged_data(self):

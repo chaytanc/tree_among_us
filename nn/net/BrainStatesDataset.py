@@ -1,10 +1,10 @@
+import sys
+sys.path.append("../")
 import torch
 from torch.utils.data import Dataset
 from BrainStatesSample import BrainStatesSample
 from Choice import Choice
 
-import sys
-sys.path.append("../")
 import data
 
 
@@ -43,8 +43,8 @@ class BrainStatesDataset(Dataset):
             sample = BrainStatesSample()
             for line in f.readlines():
                 # while line is not blank, add line as a array
-                if line.strip() == "":
-                    # skip empty lines
+                if line.strip() == "" or line.startswith("#"):
+                    # skip empty lines or anything that starts with #
                     continue
                 else:
                     # Build up the sample with readings
@@ -65,8 +65,11 @@ class BrainStatesDataset(Dataset):
             # choices = self.one_hot_encode_choices(f.readlines())
             choices = self.make_choices(f.readlines())
 
-        assert(len(choices) == self.NUM_CHOICES)
-        assert(len(samples) == len(choices))
+        # Removed these assertions since we have multiple plays of the game and people don't always
+        # get to all the choices / die before making them all
+        # assert(len(choices) == self.NUM_CHOICES)
+        # assert(len(samples) == len(choices))
+
         # used map to get rid of tuples from zip
         arr = list(map(list, zip(samples, choices)))
         return arr
@@ -77,7 +80,9 @@ class BrainStatesDataset(Dataset):
     #     return choices
 
     def make_choices(self, choices_rows):
-        choices = [Choice(choice_row, num_options=self.NUM_OPTIONS) for choice_row in choices_rows]
+        # Skips # lines
+        choices = [Choice(choice_row, num_options=self.NUM_OPTIONS) for choice_row in choices_rows
+                   if not choice_row.startswith("#")]
         return choices
 
 

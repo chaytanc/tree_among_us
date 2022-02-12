@@ -1,9 +1,9 @@
 
-class Choice():
+class Choice:
     # Choices are represented as 0, 1, ... n-1 number of choices
     # Last column of choices data is which choice they decided on
 
-    def __init__(self, choice_row,num_options=4):
+    def __init__(self, choice_row, num_options=4):
         self.NUM_OPTIONS = num_options
         # self.choice = int(choice_row[0])
         self.choice = self.encode(choice_row[0])
