@@ -5,9 +5,6 @@ from torch.utils.data import Dataset
 from BrainStatesSample import BrainStatesSample
 from Choice import Choice
 
-import data
-
-
 # Abstraction Function
 # sample_len is the number of readings we take for predicting each choice, for example if we measure
 # the alpha, beta, gamma relaxations measurements twenty times (maybe constituting a few seconds of
@@ -29,7 +26,6 @@ class BrainStatesDataset(Dataset):
         else:
             # 20 seconds prior used to predict choice
             self.SAMPLE_LEN = 20
-            #XXX just changed
             self.NUM_CHOICES = 6
             self.NUM_OPTIONS = 2
             self.NUM_READING_METRICS = 3

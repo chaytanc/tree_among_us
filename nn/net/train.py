@@ -11,18 +11,7 @@ from Net import Net
 import wandb
 from Dict2Class import Dict2Class
 
-# Paths
-# print(os.getcwd())
-# working_dir = os.getcwd()
-TRAINSET_BRAIN_STATES = "./data/fake_readings.csv"
-TESTSET_BRAIN_STATES = "./data/fake_readings.csv"
-VALIDSET_BRAIN_STATES = "./data/fake_readings.csv"
-TRAINSET_CHOICES = "./data/fake_choices.csv"
-TESTSET_CHOICES = "./data/fake_choices.csv"
-VALIDSET_CHOICES = "./data/fake_choices.csv"
-TRAIN_DIR = "./data/"
-TEST_DIR = "./data/"
-MODEL_PATH = "choice_pred_net.pth"
+
 
 # Settings
 PRINT_RATE = 3
@@ -36,6 +25,13 @@ dataset_settings = dict(
     num_options=2,
     num_reading_metrics=3,
     choices_row_length=4,
+    train_dir="./data/real/train/",
+    test_dir="./data/real/test/",
+    train_path_r="/readings.csv",
+    test_path_r="/readings.csv",
+    train_path_c="/choices.csv",
+    test_path_c="/choices.csv",
+    model_path="/choice_pred_net.pth",
 )
 
 # Hyperparameters
@@ -47,15 +43,21 @@ config = dict(
 )
 
 
-def model_pipeline(hyperparameters):
+def model_pipeline(hyperparameters, dataset_settings):
 
+    setup = Setup(train_dir=dataset_settings['train_dir'],
+                  test_dir=dataset_settings['test_dir'],
+                  train_path_r=dataset_settings['train_path_r'],
+                  test_path_r=dataset_settings['test_path_r'],
+                  train_path_c=dataset_settings['train_path_c'],
+                  test_path_c=dataset_settings['test_path_c'])
     if WB:
         with wandb.init(project="neurogame_choice_predictor", config=hyperparameters):
             # access all HPs through wandb.config, so logging matches execution!
             config = wandb.config
 
             # make the model, data, and optimization problem
-            model, train_loader, test_loader, criterion, optimizer = make(config)
+            model, train_loader, test_loader, criterion, optimizer = setup.make(config)
 
             # and use them to train the model
             train(model, train_loader, criterion, optimizer, config)
@@ -66,7 +68,7 @@ def model_pipeline(hyperparameters):
         config = Dict2Class(hyperparameters)
 
         # make the model, data, and optimization problem
-        model, train_loader, test_loader, criterion, optimizer = make(config)
+        model, train_loader, test_loader, criterion, optimizer = setup.make(config)
 
         # and use them to train the model
         train(model, train_loader, criterion, optimizer, config)
@@ -76,78 +78,101 @@ def model_pipeline(hyperparameters):
 
     return model
 
-# given a dir, get all *_readings and all *_choices, combine into a single csv for each
-def concat_data(data_dir):
-    readings = data_dir + "/readings.csv"
-    choices = data_dir + "/choices.csv"
-    files = os.listdir(data_dir)
-    for f in files:
+class Setup():
 
-        # get the beginning readings pattern, match with a choices file, write to both
-        if f.endswith("readings.csv"):
-            date_pattern = f.split("readings.csv")[0] + r"[a-zA-Z0-9]*choices.csv"
-            matches = [file for file in files if re.match(date_pattern, file)]
-            # If we only have one choices csv matching the timestamped reading csv
-            # and the match is not the choices.csv file itself, if that exists
-            # then open the readings file and append to the concat readings file
-            # and after that open the choices file and append to it
-            if len(matches) == 1 and \
-                    (not os.path.exists(choices) or not os.path.samefile(data_dir + matches[0], choices)):
-                with open(readings, "a+") as readings_file:
-                    with open(data_dir + f, "r") as f:
-                        for line in f.readlines():
-                            readings_file.write(line)
-                        f.close()
-                    readings_file.close()
+    def __init__(self, train_dir="./data/fake/", test_dir="./data/fake/",
+                train_path_r="/fake_readings.csv",
+                test_path_r="/fake_readings.csv" ,
+                valid_path_r="/fake_readings.csv",
+                train_path_c="/fake_choices",
+                test_path_c="/fake_choices",
+                valid_path_c="/fake_choices",
+                model_path="/choice_pred_net.pth"):
+        # Paths
+        # print(os.getcwd())
+        # working_dir = os.getcwd()
+        self.TRAIN_DIR = train_dir
+        self.TEST_DIR = test_dir
+        self.TRAINSET_BRAIN_STATES = train_dir + train_path_r
+        self.TESTSET_BRAIN_STATES = test_dir + test_path_r
+        # VALIDSET_BRAIN_STATES = "./data/fake/fake_readings.csv"
+        self.VALIDSET_BRAIN_STATES = test_dir + valid_path_r
+        self.TRAINSET_CHOICES = train_dir + train_path_c
+        self.TESTSET_CHOICES = test_dir + test_path_c
+        self.VALIDSET_CHOICES = test_dir + valid_path_c
+        self.MODEL_PATH = self.TRAIN_DIR + model_path
 
-                # Open matching choices file, readlines, write all lines to choices
-                with open(choices, "a+") as choices_file:
-                    with open(data_dir + matches[0], "r") as c:
-                        for line in c.readlines():
-                            choices_file.write(line)
-                        c.close()
-                    choices_file.close()
+    # Config should be dot-referenceable object
+    def make(self, config):
 
-    return readings, choices
+        # Brain states 20 seconds before each choice and the corresponding choice made
+        def load_data(brain_states_csv, choices_csv, ds):
+            dataset = BrainStatesDataset(brain_states_csv, choices_csv, dataset_settings=ds)
+            # num_workers for parallelization ;)
+            dataloader = DataLoader(dataset, batch_size=config.batch_size,
+                                    shuffle=True, num_workers=NUM_WORKERS)
+            return dataloader
 
-# Config should be dot-referenceable object
-def make(config):
+        train_readings, train_choices = self.concat_data(self.TRAIN_DIR)
+        test_readings, test_choices = self.concat_data(self.TEST_DIR)
 
-    # Brain states 20 seconds before each choice and the corresponding choice made
-    def load_data(brain_states_csv, choices_csv, ds):
-        dataset = BrainStatesDataset(brain_states_csv, choices_csv, dataset_settings=ds)
-        # num_workers for parallelization ;)
-        dataloader = DataLoader(dataset, batch_size=config.batch_size,
-                                shuffle=True, num_workers=NUM_WORKERS)
-        return dataloader
+        # testset = load_data(TESTSET_BRAIN_STATES, TESTSET_CHOICES, dataset_settings)
+        # trainset = load_data(TRAINSET_BRAIN_STATES, TRAINSET_CHOICES, dataset_settings)
 
-    train_readings, train_choices = concat_data(TRAIN_DIR)
-    test_readings, test_choices = concat_data(TEST_DIR)
+        testset = load_data(test_readings, test_choices, dataset_settings)
+        trainset = load_data(train_readings, train_choices, dataset_settings)
 
-    # testset = load_data(TESTSET_BRAIN_STATES, TESTSET_CHOICES, dataset_settings)
-    # trainset = load_data(TRAINSET_BRAIN_STATES, TRAINSET_CHOICES, dataset_settings)
+        # What happens when in real life you no longer have the labels and just have
+        # the the brain_states and no choices
 
-    testset = load_data(test_readings, test_choices, dataset_settings)
-    trainset = load_data(train_readings, train_choices, dataset_settings)
+        net = Net(dataset_settings['choices_row_length'], dataset_settings['num_options'])
 
-    # What happens when in real life you no longer have the labels and just have
-    # the the brain_states and no choices
+        # loss function to minimize classification models
+        # logarithmic loss function w smaller penalty for small diffs,
+        # large for large diffs...
+        # if entropy of loss is high, that means random guessing, so higher penalty
+        # loss = -y_true * log(y_pred)
+        criterion = nn.CrossEntropyLoss()
+        # stochastic gradient descent calculates derivs of all
+        # and minimizes error based on
+        # optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+        optimizer = optim.SGD(net.parameters(), lr=config.lr, momentum=config.momentum)
 
-    net = Net(dataset_settings['choices_row_length'], dataset_settings['num_options'])
+        return net, trainset, testset, criterion, optimizer
 
-    # loss function to minimize classification models
-    # logarithmic loss function w smaller penalty for small diffs,
-    # large for large diffs...
-    # if entropy of loss is high, that means random guessing, so higher penalty
-    # loss = -y_true * log(y_pred)
-    criterion = nn.CrossEntropyLoss()
-    # stochastic gradient descent calculates derivs of all
-    # and minimizes error based on
-    # optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
-    optimizer = optim.SGD(net.parameters(), lr=config.lr, momentum=config.momentum)
+    # given a dir, get all *_readings and all *_choices, combine into a single csv for each
+    def concat_data(self, data_dir):
+        readings = data_dir + "/readings.csv"
+        choices = data_dir + "/choices.csv"
+        files = os.listdir(data_dir)
+        for f in files:
 
-    return net, trainset, testset, criterion, optimizer
+            # get the beginning readings pattern, match with a choices file, write to both
+            if f.endswith("readings.csv"):
+                date_pattern = f.split("readings.csv")[0] + r"[a-zA-Z0-9]*choices.csv"
+                matches = [file for file in files if re.match(date_pattern, file)]
+                # If we only have one choices csv matching the timestamped reading csv
+                # and the match is not the choices.csv file itself, if that exists
+                # then open the readings file and append to the concat readings file
+                # and after that open the choices file and append to it
+                if len(matches) == 1 and \
+                        (not os.path.exists(choices) or not os.path.samefile(data_dir + matches[0], choices)):
+                    with open(readings, "a+") as readings_file:
+                        with open(data_dir + f, "r") as f:
+                            for line in f.readlines():
+                                readings_file.write(line)
+                            f.close()
+                        readings_file.close()
 
+                    # Open matching choices file, readlines, write all lines to choices
+                    with open(choices, "a+") as choices_file:
+                        with open(data_dir + matches[0], "r") as c:
+                            for line in c.readlines():
+                                choices_file.write(line)
+                            c.close()
+                        choices_file.close()
+
+        return readings, choices
 
 # epoch is number of times to train with same dataset, should be greater than or equal to 1
 def train_batch(net, data, criterion, optimizer, metrics):
@@ -198,7 +223,7 @@ def train(net, training_data, criterion, optimizer, config):
         print('Correct in epoch: {}'.format(metrics.correct))
 
     # save updates to the model weights and biases after training
-    torch.save(net.state_dict(), MODEL_PATH)
+    torch.save(net.state_dict(), dataset_settings['train_dir'] + dataset_settings['model_path'])
 
 
 def train_log(loss, example_ct, epoch):
@@ -208,6 +233,6 @@ def train_log(loss, example_ct, epoch):
 
 
 # Build, train and analyze the model with the pipeline
-model = model_pipeline(config)
+model = model_pipeline(config, dataset_settings)
 
 

@@ -8,19 +8,34 @@ from net.BrainStatesDataset import BrainStatesDataset
 import net.train as train
 
 # ASSUMES we're running from nn rootdir
-TRAINSET_BRAIN_STATES = "./data/fake_readings.csv"
-TRAINSET_CHOICES = "./data/fake_choices.csv"
-TRAIN_DIR = "./data/"
+# TRAINSET_BRAIN_STATES = "./data/fake/fake_readings.csv"
+# TRAINSET_CHOICES = "./data/fake/fake_choices.csv"
+TRAIN_DIR = "./data/fake/"
+TRAINSET_BRAIN_STATES = TRAIN_DIR + "/readings.csv"
+TRAINSET_CHOICES = TRAIN_DIR + "/choices.csv"
 
 class TestPreprocess(unittest.TestCase):
 
 
     def setUp(self) -> None:
-        os.remove("./data/choices.csv")
-        os.remove("./data/readings.csv")
+        try:
+            os.remove(TRAINSET_BRAIN_STATES)
+            os.remove(TRAINSET_CHOICES)
+        except FileNotFoundError as e:
+            print("Didn't remove choices or readings csv")
+        self.setup = train.Setup(train_dir=TRAIN_DIR,
+                            train_path_r=TRAINSET_BRAIN_STATES,
+                            train_path_c=TRAINSET_CHOICES)
+
+    def tearDown(self) -> None:
+        try:
+            os.remove(TRAINSET_BRAIN_STATES)
+            os.remove(TRAINSET_CHOICES)
+        except FileNotFoundError as e:
+            print("Didn't remove choices or readings csv")
 
     def test_concat_data(self):
-        readings, choices = train.concat_data(TRAIN_DIR)
+        readings, choices = self.setup.concat_data(TRAIN_DIR)
         self.data = BrainStatesDataset(readings, choices)
         pred_len = 7
         self.assertEqual(pred_len, len(self.data.brain_states))
@@ -29,8 +44,26 @@ class TestPreprocess(unittest.TestCase):
 class TestData(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.data = BrainStatesDataset(TRAINSET_BRAIN_STATES, TRAINSET_CHOICES)
+        # Remove concatenated files and make fresh copies
+        try:
+            os.remove(TRAINSET_BRAIN_STATES)
+            os.remove(TRAINSET_CHOICES)
+        except FileNotFoundError as e:
+            print("Didn't remove choices or readings csv")
+        self.setup = train.Setup(train_dir=TRAIN_DIR,
+                                 train_path_r=TRAINSET_BRAIN_STATES,
+                                 train_path_c=TRAINSET_CHOICES)
+        readings, choices = self.setup.concat_data(TRAIN_DIR)
+        self.data = BrainStatesDataset(readings, choices)
 
+    def tearDown(self) -> None:
+        try:
+            os.remove(TRAINSET_BRAIN_STATES)
+            os.remove(TRAINSET_CHOICES)
+        except FileNotFoundError as e:
+            print("Didn't remove choices or readings csv")
+
+    #XXX now that we concatenate, this breaks bc it adds the one other file choice
     # have 20 brain states per each of four choices, 3 readings per each of the brain states
     # (aka, fake_readings has around 80 lines and 2 measurements per line)
     def test_raw_data_size(self):
@@ -38,6 +71,7 @@ class TestData(unittest.TestCase):
         pred_len = 6
         self.assertEqual(pred_len, len(self.data.brain_states))
 
+    # Tests averaging the, say, 20 brain states captured per choice into a single 1d array output
     def test_averaged_data(self):
         # first_sample_supposed_averages = torch.Tensor([2.0, 2.25, 2.25])
         first_sample_supposed_averages = [2.0, 2.25, 2.25]
